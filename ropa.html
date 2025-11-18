@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Ropa de Mujer</title>
+  <style>
+    :root {
+      --primary: #7b1e3c; /* rojo vino */
+      --secondary: #faf5f7; /* beige rosado suave */
+      --accent: #b33a5d;
+      --text-dark: #2a0f14;
+      --card-bg: #ffffff;
+      --shadow: 0 6px 18px rgba(0,0,0,0.12);
+      --highlight: #f3e3e8;
+      --font-main: 'Playfair Display', serif;
+      --font-body: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--secondary);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+    }
+
+    .logo 
+    {
+      font-size: 53px;
+      letter-spacing: 5px;
+      font-family: "mifuente", sans serif;
+      text-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.849);
+    }
+
+@font-face {
+    font-family: "mifuente";
+    src: url("tipografias/fuente1.ttf") format("truetype");
+}
+
+    header {
+      background: var(--primary);
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      font-family: var(--font-main);
+      letter-spacing: 1px;
+      box-shadow: var(--shadow);
+    }
+
+    header nav a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-size: 28px;
+      transition: opacity 0.3s;
+      font-family: "mifuente4", sans-serif;
+    }
+
+    @font-face {
+    font-family: "mifuente3";
+    src: url("tipografias/Quantify.ttf") format("truetype");
+    }
+
+    header nav a:hover {
+      opacity: 0.6;
+    
+    }
+
+    section > .cate
+    {
+      font-family: "mifuente2", sans-serif;
+      font-size: 86px;
+      
+    }   
+     @font-face {
+    font-family: "mifuente2";
+    src: url("tipografias/Daily.otf") format("truetype");
+    }
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+
+    .card img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      filter: brightness(0.95);
+      transition: filter 0.3s ease;
+    }
+
+    .card:hover img {
+      filter: brightness(1.05);
+    }
+
+    .info {
+      padding: 18px;
+    }
+
+    .titulo {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-family: "mifuente4", sans-serif;
+    }
+
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+      font-family: "mifuente4", sans-serif;
+    }
+
+    .precio-anterior {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    footer {
+      background: var(--accent);
+      padding: 25px;
+      text-align: center;
+      color: white;
+      font-size: 15px;
+      margin-top: 40px;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.5px;
+    }
+  
+    /* Estilos mejorados para categorías */
+    .categorias {
+      padding: 50px 30px;
+      text-align: center;
+      font-family: var(--font-main);
+    }
+
+    .categorias h2 {
+      font-size: 30px;
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      padding: 10px;
+    }
+
+    .cat {
+      background: white;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 20px;
+      border-radius: 18px;
+      font-size: 23px;
+      font-family: "mifuente4", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    @font-face {
+    font-family: "mifuente4";
+    src: url("tipografias/Recline-Medium.ttf") format("truetype");
+    }
+
+    .cat:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.2);
+    }
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-contenido img {
+  width: 450px;
+  border-radius: 10px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+}
+
+.izq { left: 20px; }
+.der { right: 20px; }
+
+.oculto { display: none; }
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Ropa Juvenil</div>
+  <nav>
+    
+   
+    <a href="politicas.html">Políticas & FAQ</a>
+    
+        
+  </nav>
+</header>
+
+<section id="categorias" class="categorias">
+  <div class="cate">Categorías</div> <br><br>
+  <div class="cat-grid">
+    <div class="cat" data-cat="ballon">Balloon/Baggy</div>
+    <div class="cat" data-cat="wideleg">Wideleg</div>
+    <div class="cat" data-cat="polleras">Polleras</div>
+    <div class="cat" data-cat="shorts">Shorts</div>
+    <div class="cat" data-cat="oxford">Oxford</div>
+    <div class="cat" data-cat="minis">Minis</div>
+    <div class="cat" data-cat="corset">Corset</div>
+    <div class="cat" data-cat="todo">Mostrar todo</div>
+  </div>
+</section>
+
+
+<section id="catalogo" class="catalogo">
+
+  <div class="card wideleg" onclick="abrirProducto('serum')">
+    <img src="imagenes/wideleg/wideleg-serum.jpg" alt="Pantalón 1" />
+    <div class="info">
+      <div class="titulo">Jean Wideleg Serum</div>
+      <div class="precio">$26.500</div>
+    </div>
+  </div>
+
+  <div class="card wideleg" onclick="abrirProducto('diamond')">
+      <img src="imagenes/wideleg/wideleg-DIAMOND.jpg" alt="Pantalón 2" />
+      <div class="info">
+          <div class="titulo">Jean Wideleg Diamond</div>
+          <div class="precio">$27.000</div>
+      </div>
+  </div>
+
+  <div class="card wideleg" onclick="abrirProducto('nebraska')">
+    <img src="imagenes/wideleg/NEBRASKA-AZUL.jpg" alt="Pantalón 3" />
+    <div class="info">
+      <div class="titulo">Jean Wideleg Nebraska Azul</div>
+      <div class="precio">$27.000</div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('cleo')">
+    <img src="imagenes/Ballon/ballon-cleo.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Cleo</div>
+      <div class="precio">$26.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('charlotte')">
+    <img src="imagenes/Ballon/charlotte.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Charlotte</div>
+      <div class="precio">$26.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('diesel')">
+    <img src="imagenes/Ballon/DIESEL.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Diesel</div>
+      <div class="precio">$26.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('elixir')">
+    <img src="imagenes/Ballon/elixir.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Elixir</div>
+      <div class="precio">$26.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('rush')">
+    <img src="imagenes/Ballon/RUSH.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Rush</div>
+      <div class="precio">$27.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('maddy')">
+    <img src="imagenes/Ballon/MADDY.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Maddy</div>
+      <div class="precio">$27.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('abby')">
+    <img src="imagenes/Ballon/abby.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Abby</div>
+      <div class="precio">$26.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('donna')">
+    <img src="imagenes/Ballon/Donna.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Donna</div>
+      <div class="precio">$26.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('imperial')">
+    <img src="imagenes/Ballon/imperial.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Imperial</div>
+      <div class="precio">$27.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('killer')">
+    <img src="imagenes/Ballon/killer.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Killer</div>
+      <div class="precio">$27.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card ballon" onclick="abrirProducto('spider')">
+    <img src="imagenes/Ballon/Spider.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Balloon Spider</div>
+      <div class="precio">$25.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+
+  <!--   POLLERAS   -->
+  <div class="card polleras" onclick="abrirProducto('asap')">
+    <img src="imagenes/pollera/ASAP.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Mini Cargo ASAP</div>
+      <div class="precio">$15.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card polleras" onclick="abrirProducto('condesa')">
+    <img src="imagenes/pollera/condesa.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Mini Condesa</div>
+      <div class="precio">$15.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card polleras" onclick="abrirProducto('ursula')">
+    <img src="imagenes/pollera/URSULA.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Mini Ursula</div>
+      <div class="precio">$15.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- SHORTS  -->
+  <div class="card shorts" onclick="abrirProducto('bicolor')">
+    <img src="imagenes/short/BICOLOR.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Bicolor</div>
+      <div class="precio">$15.000 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('chance')">
+    <img src="imagenes/short/chance.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Chance</div>
+      <div class="precio">$15.500 <!--<span class="precio-anterior">$36.000</span> USAR CUANDO EL PRECIO BAJE--> </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('hiphop')">
+    <img src="imagenes/short/HIPHOP.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short HIPHOP</div>
+      <div class="precio">$15.000 <span class="precio-anterior">$18.000</span> </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('aruba')">
+    <img src="imagenes/short/aruba.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Aruba</div>
+      <div class="precio">$21.000 </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('maison')">
+    <img src="imagenes/short/maison.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Maison</div>
+      <div class="precio">$15.500 </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('marine')">
+    <img src="imagenes/short/MARINE.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Marine</div>
+      <div class="precio">$17.000  </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('milicar')">
+    <img src="imagenes/short/milicar.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Cargo Milicar</div>
+      <div class="precio">$15.500 <span class="precio-anterior">$17.000</span> </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('myway')">
+    <img src="imagenes/short/MYWAY.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short MYWAY</div>
+      <div class="precio">$15.000 </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('oasis')">
+    <img src="imagenes/short/OASIS-NEGRO.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Oasis</div>
+      <div class="precio">$21.000  </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('papel')">
+    <img src="imagenes/short/PAPEL.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Papel C/Tachas</div>
+      <div class="precio">$22.000  </div>
+    </div>
+  </div>
+
+  <div class="card shorts" onclick="abrirProducto('pretty')">
+    <img src="imagenes/short/PRETTY-BLANCO.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Short Pretty</div>
+      <div class="precio">$17.500 </div>
+    </div>
+  </div>
+
+
+
+  <!--   OXFORD   -->
+  <div class="card oxford" onclick="abrirProducto('babel')">
+    <img src="imagenes/oxford/babel.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Oxford Babel</div>
+      <div class="precio">$26.500 </div>
+    </div>
+  </div>
+
+  <div class="card oxford" onclick="abrirProducto('manhattan')">
+    <img src="imagenes/oxford/MANHATTAN.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Oxford Manhattan</div>
+      <div class="precio">$27.000  </div>
+    </div>
+  </div>
+
+  <div class="card corset" onclick="abrirProducto('madrid')">
+    <img src="imagenes/corset/MADRID.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Corset Madrid con cierre</div>
+      <div class="precio">$14.500  </div>
+    </div>
+  </div>
+
+  <div class="card corset" onclick="abrirProducto('rihanna')">
+    <img src="imagenes/corset/RIHANNA.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Corset Rihanna</div>
+      <div class="precio">$15.500 </div>
+    </div>
+  </div>
+
+  <div class="card corset" onclick="abrirProducto('robin')">
+    <img src="imagenes/corset/robin.jpg" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Corset Robin</div>
+      <div class="precio">$13.000 </div>
+    </div>
+  </div>
+
+  <div class="card corset" onclick="abrirProducto('vita')">
+    <img src="imagenes/corset/vita.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Corset Vita</div>
+      <div class="precio">$15.000  </div>
+    </div>
+  </div>
+
+  <div class="card corset" onclick="abrirProducto('zahara')">
+    <img src="imagenes/corset/ZAHRA.webp" alt="Pantalón 4" />
+    <div class="info">
+      <div class="titulo">Corset Zahara</div>
+      <div class="precio">$15.000 </div>
+    </div>
+  </div>
+
+
+
+</section>
+
+<footer>
+  © 2025 Catálogo de Ropa Femenina — Solo exhibición<br>
+  <div style="margin-top:10px; font-size:16px;">
+    <br>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:22px; vertical-align:middle; margin-right:6px;"> Instagram: <a href="https://instagram.com/tu_instagram" style="color:rgb(255, 255, 255); text-decoration:underline;" target="_blank">@ropaJuvenil900</a>
+    
+    <br> <br>
+    📧 Contacto: tienda@ejemplo.com
+  </div>
+</footer>
+
+<script>
+  const botones = document.querySelectorAll('.cat');
+  const productos = document.querySelectorAll('.card');
+
+  botones.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const categoria = btn.dataset.cat;
+
+      productos.forEach(prod => {
+        if (categoria === 'todo') {
+          prod.classList.remove('oculto');
+        } else {
+          prod.classList.toggle('oculto', !prod.classList.contains(categoria));
+        }
+      });
+    });
+  });
+</script>
+
+
+
+<script>
+
+  let imagenesSerum = [
+    "imagenes/wideleg/wideleg-serum.jpg",
+    "imagenes/wideleg/serum-img2.jpg",
+    
+  ];
+
+  let imagenesDiamond = [
+    "imagenes/wideleg/wideleg-DIAMOND.jpg",
+    "imagenes/wideleg/DIAMOND-img2.jpg",
+    "imagenes/wideleg/DIAMOND-img3.jpg"
+  ];
+
+
+
+  let imagenesnebraska = [
+    "imagenes/wideleg/NEBRASKA-AZUL.jpg",
+    "imagenes/wideleg/NEBRASKA-AZUL-img2.jpg",
+ 
+  ];
+
+  let imagenescleo = [
+    "imagenes/ballon/ballon-cleo.jpg",
+    "imagenes/ballon/ballon-cleo-img2.jpg",
+   
+  ];
+
+  
+
+    let imagenescharlotte = [
+      "imagenes/ballon/charlotte.jpg",
+    "imagenes/ballon/charlotte-img2.jpg",
+    "imagenes/ballon/charlotte-img3.jpg",
+   
+  ];
+
+ 
+
+    let imagenesdiesel = [
+      "imagenes/ballon/DIESEL.webp",
+    "imagenes/ballon/DIESEL-img2.webp",
+    "imagenes/ballon/DIESEL-img3.jpg",
+   
+  ];  
+
+    let imageneselixir = [
+      "imagenes/ballon/elixir.webp",
+    "imagenes/ballon/elixir-img2.webp",
+    "imagenes/ballon/elixir-img3.webp",
+    "imagenes/ballon/elixir-img4.webp"
+   
+  ];
+
+    let imagenesrush = [
+      "imagenes/ballon/RUSH.webp",
+    "imagenes/ballon/RUSH-img2.webp",
+    "imagenes/ballon/RUSH-img3.webp",
+    "imagenes/ballon/RUSH-img4.webp"
+   
+  ];  
+
+    let imagenesmaddy = [
+      "imagenes/ballon/MADDY.webp",
+    "imagenes/ballon/MADDY-img2.webp",
+    "imagenes/ballon/MADDY-img3.webp",
+    "imagenes/ballon/MADDY-img4.webp"
+   
+  ];  
+
+    let imagenesasap = [
+      "imagenes/pollera/asap.webp",
+    "imagenes/pollera/asap-img2.webp",
+    "imagenes/pollera/asap-img3.webp"
+   
+  ];  
+
+    let imagenescondesa = [
+      "imagenes/pollera/condesa.webp",
+    "imagenes/pollera/condesa-img2.webp",
+    "imagenes/pollera/condesa-img3.jpg"
+   
+  ];  
+
+    let imagenesursula = [
+      "imagenes/pollera/ursula.webp",
+    "imagenes/pollera/ursula-img2.webp",
+    "imagenes/pollera/ursula-img3.jpg"
+   
+  ];  
+
+    let imagenesbicolor = [
+      "imagenes/short/bicolor.webp",
+    "imagenes/short/bicolor-img2.webp"
+   
+  ]; 
+
+    let imageneschance = [
+      "imagenes/short/chance.webp",
+    "imagenes/short/chance-img2.webp",
+    "imagenes/short/chance-img3.jpg"
+   
+  ]; 
+
+    let imageneshiphop = [
+      "imagenes/short/hiphop.webp",
+    "imagenes/short/hiphop-img2.webp",
+    "imagenes/short/hiphop-img3.webp"
+   
+  ];
+
+    let imagenesabby = [
+      "imagenes/ballon/abby.jpg",
+    "imagenes/ballon/abby-img2.jpg",
+    "imagenes/ballon/abby-img3.jpg",
+    "imagenes/ballon/abby-img4.jpg",
+    "imagenes/ballon/ABBY-img5.jpg"
+   
+  ];
+
+    let imagenesdonna = [
+      "imagenes/ballon/Donna.jpg",
+    "imagenes/ballon/Donna-img2.jpg",
+    "imagenes/ballon/Donna-img3.jpg"
+   
+  ];
+
+    let imagenesimperial = [
+      "imagenes/ballon/imperial.jpg",
+    "imagenes/ballon/imperial-img2.jpg"
+   
+  ];
+
+    let imageneskiller = [
+      "imagenes/ballon/killer.jpg",
+    "imagenes/ballon/killer-img2.jpg",
+    "imagenes/ballon/killer-img3.jpg"
+   
+  ];
+
+    let imagenesspider = [
+      "imagenes/ballon/Spider.jpg",
+    "imagenes/ballon/SPIDER-img2.jpg",
+    "imagenes/ballon/Spider-img3.jpg"
+   
+  ];
+
+    let imagenesbabel = [
+      "imagenes/oxford/babel.jpg",
+    "imagenes/oxford/babel-img2.jpg",
+    "imagenes/oxford/babel-img3.jpg",
+    "imagenes/oxford/babel-img4.jpg"
+   
+  ];
+
+    let imagenesmanhattan = [
+      "imagenes/oxford/manhattan.jpg",
+    "imagenes/oxford/manhattan-img2.jpg",
+    "imagenes/oxford/manhattan-img3.jpg"
+   
+  ];
+
+    let imagenesmadrid = [
+      "imagenes/corset/madrid.jpg",
+    "imagenes/corset/madrid-img2.jpg"
+   
+  ];
+
+    let imagenesrihanna = [
+      "imagenes/corset/rihanna.jpg",
+    "imagenes/corset/rihanna-img2.jpg"
+   
+  ];
+
+    let imagenesrobin = [
+      "imagenes/corset/robin.jpg",
+    "imagenes/corset/robin-img2.png"
+   
+  ];
+
+
+    let imagenesvita = [
+      "imagenes/corset/vita.webp",
+    "imagenes/corset/vita-img2.webp",
+    "imagenes/corset/vita-img3.webp"
+   
+  ];
+
+    let imageneszahara = [
+      "imagenes/corset/zahra.webp",
+    "imagenes/corset/zahra-img2.webp",
+    "imagenes/corset/zahra-img3.webp",
+    "imagenes/corset/zahra-img4.webp"
+   
+  ];
+
+    let imagenesaruba = [
+      "imagenes/short/aruba.webp",
+    "imagenes/short/aruba-img2.webp",
+    "imagenes/short/aruba-img3.webp"
+   
+  ];
+
+    let imagenesmaison = [
+      "imagenes/short/maison.webp",
+    "imagenes/short/maison-img2.webp",
+    "imagenes/short/maison-img3.webp"
+   
+  ];
+
+    let imagenesmarine = [
+      "imagenes/short/marine.webp",
+    "imagenes/short/marine-img2.webp",
+    "imagenes/short/marine-img3.webp"
+   
+  ];
+
+    let imagenesmilicar = [
+      "imagenes/short/milicar.webp",
+    "imagenes/short/milicar-img2.webp",
+    "imagenes/short/milicar-img3.webp"
+   
+  ];
+
+    let imagenesmyway = [
+      "imagenes/short/myway.jpg",
+    "imagenes/short/myway-img2.jpg",
+    "imagenes/short/myway-img3.png"
+   
+  ];
+
+    let imagenesoasis = [
+      "imagenes/short/oasis-negro.jpg",
+    "imagenes/short/oasis-negro-img2.jpg",
+    "imagenes/short/oasis-negro-img3.jpg"
+   
+  ];
+
+    let imagenespapel = [
+      "imagenes/short/papel.webp",
+    "imagenes/short/papel-img2.webp",
+    "imagenes/short/papel-img3.webp"
+   
+  ];
+
+    let imagenespretty = [
+      "imagenes/short/pretty-blanco.jpg",
+    "imagenes/short/pretty-blanco-img2.jpg",
+    "imagenes/short/pretty-blanco-img3.jpg"
+   
+  ];
+
+
+  let indexActual = 0;
+  let imagenesActuales = [];
+
+  function abrirProducto(producto) {
+    if(producto === "diamond") imagenesActuales = imagenesDiamond;
+    if(producto === "serum") imagenesActuales = imagenesSerum;
+    if(producto === "nebraska") imagenesActuales = imagenesnebraska;
+    if(producto === "cleo") imagenesActuales = imagenescleo;
+    if(producto === "charlotte") imagenesActuales = imagenescharlotte;
+    if(producto === "diesel") imagenesActuales = imagenesdiesel;
+    if(producto === "elixir") imagenesActuales = imageneselixir;
+    if(producto === "rush") imagenesActuales = imagenesrush;
+    if(producto === "maddy") imagenesActuales = imagenesmaddy;
+    if(producto === "asap") imagenesActuales = imagenesasap;
+    if(producto === "condesa") imagenesActuales = imagenescondesa;
+    if(producto === "ursula") imagenesActuales = imagenesursula;
+    if(producto === "bicolor") imagenesActuales = imagenesbicolor;
+    if(producto === "chance") imagenesActuales = imageneschance;
+    if(producto === "hiphop") imagenesActuales = imageneshiphop;
+    if(producto === "abby") imagenesActuales = imagenesabby;
+    if(producto === "donna") imagenesActuales = imagenesdonna;
+    if(producto === "imperial") imagenesActuales = imagenesimperial;
+    if(producto === "killer") imagenesActuales = imageneskiller;
+    if(producto === "spider") imagenesActuales = imagenesspider;
+    if(producto === "babel") imagenesActuales = imagenesbabel;
+    if(producto === "manhattan") imagenesActuales = imagenesmanhattan;
+    if(producto === "madrid") imagenesActuales = imagenesmadrid;
+    if(producto === "rihanna") imagenesActuales = imagenesrihanna;
+    if(producto === "robin") imagenesActuales = imagenesrobin;
+    if(producto === "vita") imagenesActuales = imagenesvita;
+    if(producto === "zahara") imagenesActuales = imageneszahara;
+    if(producto === "aruba") imagenesActuales = imagenesaruba;
+    if(producto === "maison") imagenesActuales = imagenesmaison;
+    if(producto === "marine") imagenesActuales = imagenesmarine;
+    if(producto === "milicar") imagenesActuales = imagenesmilicar;
+    if(producto === "myway") imagenesActuales = imagenesmyway;
+    if(producto === "oasis") imagenesActuales = imagenesoasis;
+    if(producto === "papel") imagenesActuales = imagenespapel;
+    if(producto === "pretty") imagenesActuales = imagenespretty;
+
+
+    indexActual = 0;
+    document.getElementById("imgModal").src = imagenesActuales[indexActual];
+    document.getElementById("modalProducto").style.display = "flex";
+  }
+
+  function cerrarProducto() {
+    document.getElementById("modalProducto").style.display = "none";
+  }
+
+  function cambiarImg(n) {
+    indexActual += n;
+
+    if(indexActual < 0) indexActual = imagenesActuales.length - 1;
+    if(indexActual >= imagenesActuales.length) indexActual = 0;
+
+    document.getElementById("imgModal").src = imagenesActuales[indexActual];
+  }
+</script>
+
+
+
+
+<!-- MODAL DE PRODUCTO -->
+<div id="modalProducto" class="modal">
+  <span class="cerrar" onclick="cerrarProducto()">&times;</span>
+
+  <div class="modal-contenido">
+    <img id="imgModal" src="" />
+  </div>
+
+  <div class="flecha izq" onclick="cambiarImg(-1)">&#10094;</div>
+  <div class="flecha der" onclick="cambiarImg(1)">&#10095;</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Cambios y Preguntas Frecuentes</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f8f5f2;
+    color: #2c2c2c;
+}
+
+/* ------------------ HEADER ------------------ */
+/* ------------------ HEADER ------------------ */
+.header {
+    width: 100%;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #7b1e3c;  /* Rojo vino sólido */
+}
+
+.header-top {
+    padding: 25px 10px;  /* Más chico */
+    font-family: "mifuente", sans-serif;
+}
+@font-face {
+    font-family: "mifuente";
+    src: url("tipografias/Overthink.otf") format("truetype");
+}
+
+.header-top h1 {
+    color: white;
+    margin: 0;
+    font-size: 50px;      /* Más chico */
+   
+    
+    text-shadow: 2px 2px 2px #000000;
+}
+
+
+/* ------------------ NAVBAR MEJORADO ------------------ */
+.nav {
+    position: relative;
+    margin-top: -20px;
+    background: rgba(136, 136, 136, 0.541);
+    backdrop-filter: blur(12px);
+    padding: 16px 30px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+
+    top: -25px;
+}
+
+.nav a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: 0.4s ease;
+    position: relative;
+}
+
+/* Hover */
+.nav a:hover {
+    background: #7b0f1c;
+    color: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+}
+
+/* Subrayado elegante */
+.nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #720f0f;
+    transition: width 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+/* ------------------ CONTENEDOR ------------------ */
+.contenedor {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    animation: fadeIn 1s ease;
+}
+
+h2 {
+    color: #7b0f1c;
+    text-align: center;
+    font-size: 1.9rem;
+}
+
+h3 {
+    color: #7b0f1c;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* FAQ */
+.faq-item {
+    background: #f3ebe7;
+    padding: 15px 18px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 6px solid #7b0f1c;
+    transition: 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.faq-respuesta {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+}
+
+.faq-item.activo .faq-respuesta {
+    max-height: 200px;
+    padding-top: 10px;
+}
+
+.flecha {
+    font-size: 18px;
+    transition: transform .3s;
+}
+
+.faq-item.activo .flecha {
+    transform: rotate(90deg);
+}
+
+/* FOOTER */
+footer {
+    background: #7b0f1c;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+    font-size: 15px;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <h1>Política de Cambios & Preguntas Frecuentes</h1>
+        </div>
+        
+ 
+    </header>
+    <br><br>
+       <nav class="nav">
+            <a href="ropa.html">Inicio</a>
+            <a href="politicas.html">Políticas & FAQ</a>
+           
+        </nav>
+    <!-- CONTENIDO -->
+    <div class="contenedor">
+
+        <h2>Política de Cambios</h2>
+
+        <p>En nuestra tienda buscamos que todas nuestras clientas queden completamente satisfechas. Si necesitás realizar un cambio, podés hacerlo bajo las siguientes condiciones:</p>
+
+        <h3>✔ Plazo para realizar cambios</h3>
+        <p>Disponés de <b>7 días</b> desde la fecha de compra.</p>
+
+        <h3>✔ Condiciones</h3>
+        <ul>
+            <li>Prenda en perfecto estado.</li>
+            <li>Sin uso ni manchas.</li>
+            <li>Con etiqueta y empaque original.</li>
+        </ul>
+
+        <h3>✔ Productos sin cambio</h3>
+        <ul>
+            <li>Accesorios.</li>
+            <li>Productos en liquidación.</li>
+        </ul>
+
+        <h3>✔ ¿Cómo solicitar un cambio?</h3>
+        <p>Podés comunicarte por nuestro Instagram.</p>
+
+        <hr>
+
+        <h2>Preguntas Frecuentes (FAQ)</h2>
+
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+            <h3>¿Tienen guía de talles? <span class="flecha">▶</span></h3>
+            <div class="faq-respuesta">
+                <p>La mayoría de nuestras prendas van del <b>36 al 44</b>. Antes de comprar te damos medidas en centímetros.</p>
+            </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+            <h3>¿Tienen local físico? <span class="flecha">▶</span></h3>
+            <div class="faq-respuesta">
+                <p>Por ahora no, solo somos tienda virtual.</p>
+            </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+            <h3>¿Qué métodos de pago aceptan? <span class="flecha">▶</span></h3>
+            <div class="faq-respuesta">
+                <p>Aceptamos efectivo, transferencia bancaria y pagos digitales.</p>
+            </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+            <h3>¿Dónde hacen las entregas? <span class="flecha">▶</span></h3>
+            <div class="faq-respuesta">
+                <p>En Gregorio de Laferrere y Ciudad Evita. También se podria llegar a otros lugares como González Catán, etc. Pero con un recargo mínimo por la lejania.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2025 Catálogo de Ropa Femenina — Solo exhibición<br><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" style="width:22px; vertical-align:middle; margin-right:6px; color: #fff;">
+        Instagram: <a href="https://www.instagram.com/ropajuvenil900" target="_blank" style="color: #fff;">@ropajuvenil900</a>
+        <br><br>
+        📧 Contacto: tienda@ejemplo.com
+    </footer>
+
+    <script>
+        // FAQ INTERACTIVO
+        document.querySelectorAll(".faq-item").forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("activo");
+            });
+        });
+    </script>
+
+</body>
+</html>
+
